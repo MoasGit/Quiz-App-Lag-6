@@ -1,0 +1,7 @@
+.name-container,
+.theme-container,
+.quiz-container,
+.results-container {
+  border: 1px solid gray;
+  margin-bottom: 50px;
+}
