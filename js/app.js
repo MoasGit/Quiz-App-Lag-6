@@ -14,7 +14,7 @@ const nameInputField = document.getElementById("name-input-field");
 const nameInputBtn = document.getElementById("name-input-button");
 
 const nameDisplay = document.getElementById("name-display");
-const answerCheckDisplay = document.getElementById("answer-check-display");0
+const answerCheckDisplay = document.getElementById("answer-check-display");
 
 const nextQuestionBtn = document.getElementById("next-question-button");
 
