@@ -78,14 +78,17 @@ function displayQuiz(themes) {
 
   const questionText = document.createElement("p");
   questionText.innerHTML = `${themes[questionIndex].question}`;
+  questionText.classList.add("question-text");
   quizView.appendChild(questionText);
 
   let answerCheck = document.createElement("p");
   answerCheck.innerHTML = ``;
+  answerCheck.classList.add("answer-check-text");
   quizView.appendChild(answerCheck);
 
   let nextBtn = document.createElement("button");
   nextBtn.innerHTML = `Next question`;
+  nextBtn.classList.add("next-question-button");
   quizView.appendChild(nextBtn);
 
   ////NÄSTA-KNAPP EFTER VARJE FRÅGA

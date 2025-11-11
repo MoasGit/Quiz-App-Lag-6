@@ -1,3 +1,52 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+.main-container {
+  width: 100vw;
+  height: 100vh;
+}
+
 .name-container,
 .theme-container,
 .quiz-container,
@@ -10,9 +59,16 @@
   display: none;
 }
 
-.active {
-  display: flex;
-  flex-direction: column;
+#name-input-field {
+  font-size: 48px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#name-input-button {
+  font-size: 48px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .answer-check-label {
@@ -36,4 +92,165 @@ span.incorrect {
   border: 1px solid black;
   color: black;
   display: inline-block;
+  top: 55%;
+}
+
+.active {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#name-display {
+  position: absolute;
+  top: 0;
+  z-index: 9;
+  color: #fff;
+  font-size: 48px;
+}
+.theme-music-container {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  background-image: url("/images/theme-music.jpg");
+  background-size: cover;
+}
+
+.theme-movies-container {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  background-image: url("/images/theme-movies.webp");
+  background-size: cover;
+}
+
+.theme-geography-container {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  background-image: url("/images/theme-geography.jpg");
+  background-size: cover;
+}
+
+.theme-christmas-container {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  background-image: url("/images/theme-christmas.jpg");
+  background-size: cover;
+}
+
+#theme-music {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: transparent;
+  background-size: cover;
+  font-size: 40px;
+  color: #fff;
+  background: #00000085;
+  cursor: pointer;
+}
+
+#theme-movies {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: transparent;
+  background-size: cover;
+  font-size: 40px;
+  color: #fff;
+  background: #00000085;
+  cursor: pointer;
+}
+
+#theme-geography {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: transparent;
+  background-size: cover;
+  font-size: 40px;
+  color: #fff;
+  background: #00000085;
+  cursor: pointer;
+}
+
+#theme-christmas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: transparent;
+  background-size: cover;
+  font-size: 40px;
+  color: #fff;
+  background: #00000085;
+  cursor: pointer;
+}
+
+.question-text {
+  position: absolute;
+  font-size: 38px;
+}
+
+.next-question-button {
+  position: absolute;
+}
+
+.answer-button {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  top: 55%;
+  cursor: pointer;
+}
+
+.answer-button {
+  background-color: #c41e3a;
+}
+.answer-button:nth-of-type(2) {
+  background-color: #1b4d3e;
+}
+.answer-button:nth-of-type(3) {
+  background-color: #f8f9fa;
+}
+.answer-button:nth-of-type(4) {
+  background-color: #d4af37;
+}
+
+.answer-check-text {
+  position: absolute;
+  top: 40%;
+  font-size: 38px;
 }
