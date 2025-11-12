@@ -106,12 +106,12 @@
       {
         "id": 2,
         "question": "Vilken är den mest spelade jullåten på Spotify?",
-        "options": ["WHAM - Last Chsitmas", "Mariah Carey - All I Want For Christmas Is You", "Santa Tell Me - Ariana Grande", "Driving home for christmas - Chris Rea"],
+        "options": ["WHAM - Last Christmas", "Mariah Carey - All I Want For Christmas Is You", "Santa Tell Me - Ariana Grande", "Driving home for christmas - Chris Rea"],
         "answer": 0
       },
        {
         "id": 3,
-        "question": "Vem gör rösten till konduktören i The Polar Express (2004)?",
+        "question": "Vem gör rösten till konduktören i 'The Polar Express' (2004)?",
         "options": ["Tom Hanks", "Robert Deniro", "Jack Black", "Tim Allen"],
         "answer": 0
       },
