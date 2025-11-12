@@ -4,6 +4,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 html {
@@ -75,11 +78,17 @@ h6 {
 }
 
 span.correct {
-  color: green;
+  color: #fff;
+  background-color: green;
+  padding: 10px 20px;
+  border-radius: 30px;
 }
 
 span.incorrect {
-  color: red;
+  color: #fff;
+  background-color: red;
+  padding: 10px 20px;
+  border-radius: 30px;
 }
 
 .hidden {
@@ -112,30 +121,10 @@ span.incorrect {
   color: #fff;
   font-size: 48px;
 }
-.theme-music-container {
-  width: 50%;
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  position: relative;
-  background-image: url("/images/theme-music.jpg");
-  background-size: cover;
-}
 
-.theme-movies-container {
-  width: 50%;
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  position: relative;
-  background-image: url("/images/theme-movies.webp");
-  background-size: cover;
-}
-
+.theme-music-container,
+.theme-christmas-container,
+.theme-movies-container,
 .theme-geography-container {
   width: 50%;
   height: 50%;
@@ -144,64 +133,54 @@ span.incorrect {
   justify-content: center;
   font-size: 2rem;
   position: relative;
-  background-image: url("/images/theme-geography.jpg");
+  background-position: center;
   background-size: cover;
+  overflow: hidden;
 }
 
-.theme-christmas-container {
-  width: 50%;
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  position: relative;
+.theme-music-container::before,
+.theme-christmas-container::before,
+.theme-movies-container::before,
+.theme-geography-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.theme-music-container::before {
+  background-image: url("/images/theme-music.jpg");
+}
+
+.theme-christmas-container::before {
   background-image: url("/images/theme-christmas.jpg");
-  background-size: cover;
 }
 
-#theme-music {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: transparent;
-  background-size: cover;
-  font-size: 40px;
-  color: #fff;
-  background: #00000085;
-  cursor: pointer;
+.theme-movies-container::before {
+  background-image: url("/images/theme-movies.webp");
 }
 
-#theme-movies {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: transparent;
-  background-size: cover;
-  font-size: 40px;
-  color: #fff;
-  background: #00000085;
-  cursor: pointer;
+.theme-geography-container::before {
+  background-image: url("/images/theme-geography.jpg");
 }
 
-#theme-geography {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: transparent;
-  background-size: cover;
-  font-size: 40px;
-  color: #fff;
-  background: #00000085;
-  cursor: pointer;
+/* Hover effect - scale the pseudo-element */
+.theme-music-container:hover::before,
+.theme-christmas-container:hover::before,
+.theme-movies-container:hover::before,
+.theme-geography-container:hover::before {
+  transform: scale(1.1);
 }
 
+#theme-music,
+#theme-movies,
+#theme-geography,
 #theme-christmas {
   position: absolute;
   width: 100%;
@@ -214,15 +193,44 @@ span.incorrect {
   color: #fff;
   background: #00000085;
   cursor: pointer;
+  border: none;
 }
 
 .question-text {
   position: absolute;
   font-size: 38px;
+  background-color: #2f2f2f;
+  border-radius: 30px;
+  padding: 10px 30px;
+  color: #fff;
 }
 
 .next-question-button {
   position: absolute;
+  background-color: #2f2f2f;
+  border-radius: 30px;
+  padding: 10px 30px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.next-question-button:hover {
+  background-color: #5e5d5d;
+}
+
+.next-question-button::before {
+  content: "Temporary :)";
+  position: absolute;
+  top: 0px;
+  left: -10px;
+  font-size: 12px;
+  color: black;
+  background-color: red;
+  border-radius: 10px;
+  padding: 2px 5px;
+  transform: rotate(-24deg);
 }
 
 .answer-button {
@@ -232,8 +240,18 @@ span.incorrect {
   align-items: center;
   justify-content: center;
   font-size: 2rem;
-  top: 55%;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.answer-button:not(:disabled):hover {
+  font-size: 40px;
+}
+
+.answer-button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .answer-button {
@@ -253,4 +271,19 @@ span.incorrect {
   position: absolute;
   top: 40%;
   font-size: 38px;
+}
+
+.answer-check-text {
+  animation: scaleInBounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes scaleInBounce {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

@@ -19,9 +19,8 @@ const answerCheckDisplay = document.getElementById("answer-check-display");
 const nextQuestionBtn = document.getElementById("next-question-button");
 
 const playerScore = document.getElementById("player-score");
-const totalScore = document.getElementById("total-score")
-console.log(totalScore.value)
-
+const totalScore = document.getElementById("total-score");
+console.log(totalScore.value);
 
 const restartBtn = document.getElementById("restart-button");
 
@@ -138,9 +137,20 @@ function displayQuiz(themes) {
     ///SÄTTER EN KLASS PÅ KNAPPARNA FÖR SYNS SKULL
     if (selectedIdx === correctIndex) {
       answerCheck.innerHTML = `<span class="correct">Du hade rätt!</span>`;
+
+      //DESSA ÄR BARA HÄR FÖR ATT RE-TRIGGA ANIMATIONEN
+      answerCheck.style.animation = "none";
+      answerCheck.offsetHeight;
+      answerCheck.style.animation = "";
+
+      ///LÄGGER TILL POÄNG OM SVARET ÄR RÄTT
       playerPoints++;
     } else {
       answerCheck.innerHTML = `<span class="incorrect">Du hade fel!</span>`;
+      //DESSA ÄR BARA HÄR FÖR ATT RE-TRIGGA ANIMATIONEN
+      answerCheck.style.animation = "none";
+      answerCheck.offsetHeight;
+      answerCheck.style.animation = "";
     }
   }
 }
