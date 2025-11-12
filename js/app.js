@@ -70,6 +70,10 @@ themeChristmasButton.addEventListener("click", () => fetchQuiz("christmas"));
 function displayQuiz(themes) {
   console.log("themes received:", themes);
 
+  let savedScore = localStorage.getItem("playerScoreHistory");
+  savedScore = Number(savedScore);
+  console.log(savedScore)
+
   const arrLength = themes.length;
   console.log(arrLength);
 
@@ -103,8 +107,10 @@ function displayQuiz(themes) {
       quizView.classList.remove("active");
       resultsView.classList.add("active");
       playerScore.innerHTML = `Total score ${playerPoints}`;
-      playerTotalScore = playerPoints;
+      playerTotalScore += playerPoints;
       questionIndex = -1;
+      console.log(playerTotalScore)
+      localStorage.setItem("playerScoreHistory", playerTotalScore);
     }
   });
 
@@ -120,6 +126,7 @@ function displayQuiz(themes) {
 
     ///STARTAR CHECKFUNKTIONEN OCH SKICKAR MED SVARET MAN KLICKADE PÅ
     btn.addEventListener("click", function () {
+
       checkAnswer(idx);
 
       console.log(questionIndex);
