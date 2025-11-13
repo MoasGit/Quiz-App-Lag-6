@@ -1,3 +1,8 @@
+import { init, start, stop } from './timer.js';
+
+const quizTimer = document.querySelector(".quizTimer");
+
+
 //SÄTTER VARIABLER FÖR DOM-ELEMENT
 
 const themeMusicButton = document.getElementById("theme-music");
@@ -127,6 +132,9 @@ function displayQuiz(themes) {
     }
   });
 
+//Initiera timern. lägg till vad som ska hända när tiden är ute
+
+
   let options = themes[questionIndex].options;
   let correctIndex = themes[questionIndex].answer;
 
@@ -184,6 +192,28 @@ function displayQuiz(themes) {
     playerPoints = 0;
     questionIndex = -1;
   });
+
+  let quizTimer = document.createElement("p");
+  quizTimer.innerHTML = `10`;
+  quizTimer.classList.add("quizTimer");
+  quizView.appendChild(quizTimer);
+
+  init(quizTimer, function() {
+    if (questionIndex < arrLength - 1) {
+      stop();
+      displayQuiz(themes);
+    } else {
+      quizView.classList.remove("active");
+      resultsView.classList.add("active");
+      playerScore.innerHTML = `Total score ${playerPoints}`;
+      playerTotalScore += playerPoints;
+      questionIndex = -1;
+      console.log(playerTotalScore);
+      localStorage.setItem("playerScoreHistory", playerTotalScore);
+    }
+  });
+
+  start();
 }
 ///NOLLSTÄLLER QUIZZET OCH GÅR TILLBAKS TILL TEMAVAL-CONTAINERN
 restartBtn.addEventListener("click", function () {
