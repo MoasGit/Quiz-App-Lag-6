@@ -179,9 +179,6 @@ function displayQuiz(themes) {
     }
   });
 
-//Initiera timern. lägg till vad som ska hända när tiden är ute
-
-
   let options = themes[questionIndex].options;
   let correctIndex = themes[questionIndex].answer;
 
@@ -236,17 +233,20 @@ function displayQuiz(themes) {
   quizView.appendChild(backToMainBtn);
 
   backToMainBtn.addEventListener("click", function () {
+    stop();
     quizView.classList.remove("active");
     themeSelectView.classList.add("active");
     playerPoints = 0;
     questionIndex = -1;
   });
 
+//skapa timern i HTML
   let quizTimer = document.createElement("p");
   quizTimer.innerHTML = `10`;
   quizTimer.classList.add("quizTimer");
   quizView.appendChild(quizTimer);
 
+//Initierar timern och stoppas om man nått gränsen för antal frågor
   init(quizTimer, function() {
     if (questionIndex < arrLength - 1) {
       stop();
@@ -265,18 +265,7 @@ function displayQuiz(themes) {
   start();
 }
 
-function createSnowflakes() {
-    for (let i = 0; i < 100; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.innerHTML = '❄';
-        snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        snowflake.style.animationDelay = Math.random() * 5 + 's';
-        snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-        document.body.appendChild(snowflake);
-    }
-}
+
 
 ///NOLLSTÄLLER QUIZZET OCH GÅR TILLBAKS TILL TEMAVAL-CONTAINERN
 restartBtn.addEventListener("click", function () {

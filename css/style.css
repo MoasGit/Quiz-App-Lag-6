@@ -387,18 +387,17 @@ span.incorrect {
 }
 
 .quizTimer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0;
-  margin-right: 0;
   position: absolute;
-  border-radius: 50%;
-  padding: 20px;
-  color: #000;
-  font-size: 1.5rem;
+  background-color: #2f2f2f;
+  border-radius: 30px;
+  padding: 10px 30px;
+  margin-top: 10px;
+  color: #fff;
+  font-size: 3.7rem;
   z-index: 6;
   top: 0;
 }
+
 .snowflake-button {
   display: block;
   position: absolute;
