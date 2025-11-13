@@ -179,9 +179,6 @@ function displayQuiz(themes) {
     }
   });
 
-//Initiera timern. lägg till vad som ska hända när tiden är ute
-
-
   let options = themes[questionIndex].options;
   let correctIndex = themes[questionIndex].answer;
 
@@ -236,17 +233,20 @@ function displayQuiz(themes) {
   quizView.appendChild(backToMainBtn);
 
   backToMainBtn.addEventListener("click", function () {
+    stop();
     quizView.classList.remove("active");
     themeSelectView.classList.add("active");
     playerPoints = 0;
     questionIndex = -1;
   });
 
+//skapa timern i HTML
   let quizTimer = document.createElement("p");
   quizTimer.innerHTML = `10`;
   quizTimer.classList.add("quizTimer");
   quizView.appendChild(quizTimer);
 
+//Initierar timern och stoppas om man nått gränsen för antal frågor
   init(quizTimer, function() {
     if (questionIndex < arrLength - 1) {
       stop();
