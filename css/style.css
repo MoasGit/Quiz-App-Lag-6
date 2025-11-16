@@ -45,11 +45,36 @@ h6 {
   overflow-wrap: break-word;
 }
 
+.logo {
+  height: 300px;
+  width: 300px;
+}
+
+.header {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 68px;
+  color: #f1d695;
+}
+
+.choose-theme-text {
+  position: absolute;
+  color: #fff;
+  background-color: #2f2f2f;
+  font-size: 40px;
+  z-index: 1;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
 .main-container {
   width: 100vw;
   height: 100vh;
+  background-color: #6a1919;
+  z-index: 1;
+  position: relative;
 }
-
 
 .view-container {
   display: none;
@@ -66,7 +91,6 @@ h6 {
   padding: 10px;
   border-radius: 10px;
 }
-
 
 span.correct {
   color: #fff;
@@ -374,20 +398,62 @@ span.incorrect {
   transition: all 0.2s ease-in-out;
 }
 .back-to-main-button:hover {
-  
-  transform:scale(1.1);
+  transform: scale(1.1);
 }
 
 .quizTimer {
-  position: absolute;
-  background-color: #2f2f2f;
-  border-radius: 30px;
-  padding: 10px 30px;
-  margin-top: 10px;
-  color: #fff;
-  font-size: 3.7rem;
-  z-index: 6;
-  top: 0;
+    position: fixed;
+    top: 20px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    background-color: #2f2f2f;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 6;
+    transform: translateX(-50%);
+}
+
+.timer-text {
+    color: white;
+    font-size: 3.7rem;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.timer-bar {
+    width: 120px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.timer-bar-fill {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    transition: width 1s linear;
+}
+
+.quizTimer.warning .timer-text {
+    color: #ff4444;
+    font-size: 3.7rem;
+}
+
+.quizTimer.warning .timer-bar {
+    background-color: rgba(255, 68, 68, 0.3);
+}
+
+.quizTimer.warning .timer-bar-fill {
+    background-color: #ff4444;
 }
 
 .snowflake-button {
@@ -406,34 +472,32 @@ span.incorrect {
   color: #fff;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  }
-  .snowflake-button:hover {
-    transform: scale(1.1);
-    color: rgb(173, 199, 255);
-  }
+}
+.snowflake-button:hover {
+  transform: scale(1.1);
+  color: rgb(173, 199, 255);
+}
 
-    .snowflake {
-    position: fixed;
-    top: -10px;
-    color: #fff;
-    font-size: 1em;
-    animation: fall linear infinite;
-    z-index: 8888;
-    opacity: 0.8;
-    pointer-events: none;
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: #fff;
+  font-size: 1em;
+  animation: fall linear infinite;
+  z-index: 8888;
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 body.snow-active .snowflake {
-    display: block;
-      }
+  display: block;
+}
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-  
-
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
 
 .mute-button {
   position: absolute;
