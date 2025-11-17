@@ -1,7 +1,7 @@
-const correctSound = new Audio("/audio/correct.wav");
-const incorrectSound = new Audio("/audio/incorrect.wav");
-const timeRunningOutSound = new Audio("/audio/time-running-out.wav");
-const jingleSound = new Audio("/audio/jingle.wav");
+const correctSound = new Audio("./audio/correct.wav");
+const incorrectSound = new Audio("./audio/incorrect.wav");
+const timeRunningOutSound = new Audio("./audio/time-running-out.wav");
+const jingleSound = new Audio("./audio/jingle.wav");
 
 let muted = false;
 
