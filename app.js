@@ -5,7 +5,7 @@ import {
   incorrectSound,
   setupMuteButton,
   playSound,
-} from "/js/sound-effects.js";
+} from "./js/sound-effects.js";
 
 import { init, start, stop } from './js/timer.js';
 
