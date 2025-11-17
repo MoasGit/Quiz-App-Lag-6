@@ -1,5 +1,5 @@
 //IMPORTS
-import { timeRunningOutSound, playSound } from "./js/sound-effects.js";
+import { timeRunningOutSound, playSound } from "./sound-effects.js";
 
 let quizTimer = null;
 let timeLeft = 10;
