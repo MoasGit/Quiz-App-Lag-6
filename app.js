@@ -1,13 +1,13 @@
-
 //IMPORTS
 import {
   correctSound,
   incorrectSound,
+  jingleSound,
   setupMuteButton,
   playSound,
-} from "/js/sound-effects.js";
+} from "./js/sound-effects.js";
 
-import { init, start, stop } from './js/timer.js';
+import { init, start, stop } from "./js/timer.js";
 
 const quizTimer = document.getElementById("question-timer");
 
@@ -22,13 +22,15 @@ const nameView = document.getElementById("name-container");
 const themeSelectView = document.getElementById("theme-select-container");
 const quizView = document.getElementById("quiz-container");
 const resultsView = document.getElementById("results-container");
-const totalScoreDisplay = document.getElementById("player-total-score-display")
+const totalScoreDisplay = document.getElementById("player-total-score-display");
 
 const nameInputField = document.getElementById("name-input-field");
 const nameInputBtn = document.getElementById("name-input-button");
 
 const nameDisplay = document.getElementById("name-display");
 const answerCheckDisplay = document.getElementById("answer-check-display");
+
+const switchUserBtn = document.getElementById("switch-user-button");
 
 const nextQuestionBtn = document.getElementById("next-question-button");
 
@@ -52,16 +54,23 @@ let playerTotalScore = 0;
 ///STYR VAD KNAPPEN SKA GÖRA I NAMN CONTAINERN
 nameInputBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  playerName = nameInputField.value.trim() || "Player"; //Tar bort empy spaces (AI)
+  playerName = nameInputField.value.trim() || "Tomtenisse"; //Tar bort empy spaces (AI)
   nameView.classList.remove("active");
   themeSelectView.classList.add("active");
-  nameDisplay.textContent = `Welcome ${playerName}!`;
+  nameDisplay.textContent = `Välkommen ${playerName}!`;
+});
+
+///KNAPP FÖR ATT BYTA ANVÄNDARE
+switchUserBtn.addEventListener("click", function () {
+  themeSelectView.classList.remove("active");
+  nameView.classList.add("active");
+  nameInputField.value = "";
 });
 
 ///LADDAR IN DATAN FRÅN JSON-FILEN
 async function fetchQuiz(themeChoice) {
   try {
-    const response = await fetch("/data/quiz.json");
+    const response = await fetch("./quiz.json");
 
     if (!response.ok) {
       throw new Error(`HTTP error status ${response.status}`);
@@ -114,31 +123,32 @@ async function fetchQuiz(themeChoice) {
 //FÅR DET ATT SNÖA!
 let snowButton = document.createElement("button");
 let snowing = false;
-  snowButton.innerHTML = '❄';
-  snowButton.classList.add("snowflake-button");
-  document.body.appendChild(snowButton);
-snowButton.addEventListener("click", function(){
-    if (!snowing) {
-        createSnowflakes();
-        snowing = true;
-    }else{
-      snowing = false;
-      const snowflakes = document.querySelectorAll('.snowflake');
-      snowflakes.forEach(snowflake => snowflake.remove());
-    }
+snowButton.innerHTML = "❄";
+snowButton.classList.add("snowflake-button");
+document.body.appendChild(snowButton);
+snowButton.addEventListener("click", function () {
+  if (!snowing) {
+    createSnowflakes();
+    snowing = true;
+    playSound(jingleSound);
+  } else {
+    snowing = false;
+    const snowflakes = document.querySelectorAll(".snowflake");
+    snowflakes.forEach((snowflake) => snowflake.remove());
+  }
 });
 
-  function createSnowflakes() {
-    for (let i = 0; i < 100; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.innerHTML = '❄';
-        snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        snowflake.style.animationDelay = Math.random() * 5 + 's';
-        snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-        document.body.appendChild(snowflake);
-    }
+function createSnowflakes() {
+  for (let i = 0; i < 100; i++) {
+    const snowflake = document.createElement("div");
+    snowflake.className = "snowflake";
+    snowflake.innerHTML = "❄";
+    snowflake.style.left = Math.random() * 100 + "%";
+    snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+    snowflake.style.animationDelay = Math.random() * 5 + "s";
+    snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
+    document.body.appendChild(snowflake);
+  }
 }
 
 ///DET HÄR GJORDE AI - EVENTLYSSNARE FÖR TEMAVAL-KNAPPARNA (VARFÖR WRAPPA FUNKTION I FUNKTION???)
@@ -146,7 +156,7 @@ snowButton.addEventListener("click", function(){
 themeMusicButton.addEventListener("click", () => fetchQuiz("music"));
 themeGeographyButton.addEventListener("click", () => fetchQuiz("geography"));
 themeMoviesButton.addEventListener("click", () => fetchQuiz("movies"));
-themeChristmasButton.addEventListener("click", () =>  fetchQuiz("christmas"));
+themeChristmasButton.addEventListener("click", () => fetchQuiz("christmas"));
 
 //SKAPAR MUTE-KNAPP FÖR LJUDEFFEKTER
 const mainContainer = document.querySelector(".main-container");
@@ -167,7 +177,7 @@ function displayQuiz(themes) {
 
   playersArray = Array.isArray(recentScores) ? recentScores : [];
 
-/*
+  /*
   savedScore = Number(savedScore);
   console.log(savedScore);*/
 
@@ -203,7 +213,7 @@ function displayQuiz(themes) {
   quizView.appendChild(answerCheck);
 
   let nextBtn = document.createElement("button");
-  nextBtn.innerHTML = `Next question`;
+  nextBtn.innerHTML = `Nästa fråga &#8594;`;
   nextBtn.classList.add("next-question-button");
   quizView.appendChild(nextBtn);
 
@@ -218,52 +228,48 @@ function displayQuiz(themes) {
       quizView.classList.remove("active");
       resultsView.classList.add("active");
       playerScore.innerHTML = `Total score ${playerPoints}`;
-      playerTotalScore = playerPoints
+      playerTotalScore = playerPoints;
 
-      
       let thisPlayer = {
         name: playerName,
-        score: Number(playerTotalScore)
-      }
-        for (let i = 0; i < playersArray.length; i++){
-          if (playersArray[i].name == playerName){
-              playersArray[i].score += playerTotalScore
-          }
-            
+        score: Number(playerTotalScore),
+      };
+      for (let i = 0; i < playersArray.length; i++) {
+        if (playersArray[i].name == playerName) {
+          playersArray[i].score += playerTotalScore;
         }
-         
+      }
+
       let found = false;
-      for (let i = 0; i < playersArray.length; i++){
-        if(playersArray[i].name == playerName){
+      for (let i = 0; i < playersArray.length; i++) {
+        if (playersArray[i].name == playerName) {
           totalScoreDisplay.innerHTML = `Spelare: ${playerName}, Totala quizpoäng: ${playersArray[i].score}`;
           found = true;
           break;
         }
       }
-      if(found == false){
-        totalScoreDisplay.innerHTML = `Ny spelare: ${playerName}, Totala quizpoäng: ${playerTotalScore}`
+      if (found == false) {
+        totalScoreDisplay.innerHTML = `Ny spelare: ${playerName}, Totala quizpoäng: ${playerTotalScore}`;
       }
 
-    
-      
-      
       questionIndex = -1;
       console.log(playerTotalScore);
 
-       
-        if (found == false){
-        playersArray.push(thisPlayer)
-        }
+      if (found == false) {
+        playersArray.push(thisPlayer);
+      }
 
-        localStorage.setItem("playerScoreHistory", JSON.stringify(playersArray))
+      localStorage.setItem("playerScoreHistory", JSON.stringify(playersArray));
 
-        let highScoreArray = playersArray.slice().sort((a, b) => Number(b.score) - Number(a.score))
-        
-        highScoreArray.slice(0, 5).forEach((a) => {
-          let li = document.createElement("li");
-          li.innerHTML = `Spelare: ${a.name}, Score: ${a.score}`
-          highScore.appendChild(li)
-        })
+      let highScoreArray = playersArray
+        .slice()
+        .sort((a, b) => Number(b.score) - Number(a.score));
+
+      highScoreArray.slice(0, 5).forEach((a) => {
+        let li = document.createElement("li");
+        li.innerHTML = `Spelare: ${a.name}, Score: ${a.score}`;
+        highScore.appendChild(li);
+      });
     }
   });
 
@@ -313,6 +319,9 @@ function displayQuiz(themes) {
       answerCheck.offsetHeight;
       answerCheck.style.animation = "";
     }
+
+    nextBtn.style.display = "block";
+    stop();
   }
   //TAR DIG TILLBAKA TILL TEMAVAL-CONTAINERN
   let backToMainBtn = document.createElement("button");
@@ -329,11 +338,11 @@ function displayQuiz(themes) {
     highscoreBtn.style.display = "flex";
   });
 
-//skapa timern i HTML
+  //skapa timern i HTML
   let quizTimer = document.createElement("div");
   quizTimer.id = "question-timer";
   quizTimer.classList.add("quizTimer");
-  
+
   let timerText = document.createElement("span");
   timerText.classList.add("timer-text");
   timerText.textContent = "10";
@@ -343,15 +352,15 @@ function displayQuiz(themes) {
 
   let timerBarFill = document.createElement("div");
   timerBarFill.classList.add("timer-bar-fill");
-  
+
   timerBar.appendChild(timerBarFill);
   quizTimer.appendChild(timerText);
   quizTimer.appendChild(timerBar);
 
   quizView.appendChild(quizTimer);
 
-//Initierar timern och stoppas om man nått gränsen för antal frågor
-  init(quizTimer, function() {
+  //Initierar timern och stoppas om man nått gränsen för antal frågor
+  init(quizTimer, function () {
     if (questionIndex < arrLength - 1) {
       stop();
       displayQuiz(themes);
