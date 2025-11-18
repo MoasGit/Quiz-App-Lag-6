@@ -577,6 +577,13 @@ body.snow-active .snowflake {
   transform: scale(1.1);
 }
 
+.highscore-button{
+  position: absolute;
+  z-index: 200;
+  padding: 10px;
+  bottom: 20px;
+  right: 20px;
+  background: #2f2f2f;
 #high-score-view {
   border: 2px double black;
   border-radius: 7px;
@@ -588,6 +595,7 @@ body.snow-active .snowflake {
   width: 300px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+  
 #switch-user-button {
   position: absolute;
   z-index: 1000;
@@ -606,6 +614,57 @@ body.snow-active .snowflake {
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease-in-out;
+}
+  
+.highscore-button:hover {
+  transform: scale(1.1);
+}
+
+.modal{
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+  
+.modal-content{
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.close-btn:hover{
+  transform: scale(1.2);
+  color: red;
+}
+
+.highscore-title{
+  color: blue;
+  font-weight: 600;
+}
+
+.highscore-ul-style{
+  list-style:decimal;
+  
 }
 
 #switch-user-button:hover {

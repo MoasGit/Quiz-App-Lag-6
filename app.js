@@ -86,7 +86,41 @@ async function fetchQuiz(themeChoice) {
   }
 }
 
-//Får DET ATT SNÖA!
+/////HIGHSCORE MODAL SOM VISAR TOPP 5 SPELARE
+  const highscoreBtn = document.createElement("button");
+  highscoreBtn.innerHTML = '🏆';
+  highscoreBtn.classList.add("highscore-button");
+  document.body.appendChild(highscoreBtn);
+
+  const modal = document.getElementById("highscore-modal");
+  const closeBtn = document.querySelector(".close-btn")
+  const highscoreList = document.getElementById("high-score");
+
+  function showHighscores() {
+    let playersArray = JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
+
+    let sorted = playersArray.slice().sort((a, b) => b.score - a.score);
+    let topFivePlayers = sorted.slice(0,5);
+
+    highscoreList.innerHTML = "";
+
+    topFivePlayers.forEach(player => {
+      let li = document.createElement("li");
+      li.textContent = `Spelare: ${player.name}, Score: ${player.score}`;
+      highscoreList.appendChild(li);
+    })
+  }
+
+  highscoreBtn.addEventListener("click", function(){
+    showHighscores();
+    modal.style.display = "flex";
+  });
+
+  closeBtn.addEventListener("click", function(){
+    modal.style.display = "none";
+  });
+  
+//FÅR DET ATT SNÖA!
 let snowButton = document.createElement("button");
 let snowing = false;
 snowButton.innerHTML = "❄";
@@ -139,6 +173,7 @@ function displayQuiz(themes) {
   console.log("themes received:", themes);
 
   let recentScores = JSON.parse(localStorage.getItem("playerScoreHistory"));
+  highscoreBtn.style.display = "none";
 
   playersArray = Array.isArray(recentScores) ? recentScores : [];
 
@@ -300,6 +335,7 @@ function displayQuiz(themes) {
     themeSelectView.classList.add("active");
     playerPoints = 0;
     questionIndex = -1;
+    highscoreBtn.style.display = "flex";
   });
 
   //skapa timern i HTML
@@ -346,5 +382,6 @@ function displayQuiz(themes) {
 restartBtn.addEventListener("click", function () {
   resultsView.classList.remove("active");
   themeSelectView.classList.add("active");
+   highscoreBtn.style.display = "flex";
   playerPoints = 0;
 });
