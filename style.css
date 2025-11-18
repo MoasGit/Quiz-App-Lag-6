@@ -115,13 +115,17 @@ h6 {
   font-size: 48px;
   padding: 10px 20px;
   border-radius: 10px;
-  border: none;
+  border: 2px solid #fff;
   height: 100px;
   margin-right: 10px;
+  background: transparent;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
 }
 
 #name-input-field:focus {
   outline: none;
+  border-color: #fbdd8d;
 }
 
 #name-input-button {
@@ -138,6 +142,10 @@ h6 {
 
 #name-input-button:hover {
   transform: scale(1.1);
+}
+
+#name-input-field::placeholder {
+  color: #fbdd8d;
 }
 
 span.correct {
@@ -567,6 +575,7 @@ body.snow-active .snowflake {
   font-size: 26px;
   width: 50px;
   height: 50px;
+  fill: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -580,11 +589,25 @@ body.snow-active .snowflake {
 .highscore-button {
   position: absolute;
   z-index: 200;
-  padding: 10px;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 100%;
+  border: none;
   background: #2f2f2f;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  fill: #fff;
+  display: flex;
+  font-size: 0px;
+  transition: all 0.2s ease-in-out;
+  justify-content: center;
+  align-items: center;
 }
+.highscore-button svg {
+  width: 25px;
+}
+
 #high-score-view {
   border: 2px double black;
   border-radius: 7px;
@@ -602,7 +625,7 @@ body.snow-active .snowflake {
   z-index: 1000;
   padding: 10px;
   top: 30px;
-  color: #fff;
+  fill: #fff;
   left: 30px;
   background-color: var(--background-black);
   border-radius: 50%;
@@ -670,4 +693,17 @@ body.snow-active .snowflake {
 #switch-user-button:hover {
   transform: scale(1.1);
 }
-/*---*/
+
+.copyright-container {
+  bottom: 30px;
+  position: absolute;
+  color: #fbdc8d;
+}
+
+.version-container {
+  color: #fbdd8d;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 30px;
+}
