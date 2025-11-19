@@ -714,6 +714,14 @@ body.snow-active .snowflake {
   font-size: 30px;
 }
 
+.time-up-message {
+    color: #ff4444;
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
 @media (max-width: 992px) {
   #theme-music,
   #theme-movies,
