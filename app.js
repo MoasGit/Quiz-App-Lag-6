@@ -28,7 +28,7 @@ const totalScoreDisplay = document.getElementById("player-total-score-display");
 const nameInputField = document.getElementById("name-input-field");
 const nameInputBtn = document.getElementById("name-input-button");
 const playerChoice = document.getElementById("player-choice");
-const playerList = document.getElementById("player-list")
+const playerList = document.getElementById("player-list");
 
 const nameDisplay = document.getElementById("name-display");
 const answerCheckDisplay = document.getElementById("answer-check-display");
@@ -54,11 +54,12 @@ let questionIndex = -1;
 let playerPoints = 0;
 let playerTotalScore = 0;
 
-///STYR VAD KNAPPEN SKA GÖRA I NAMN CONTAINERN
+///STYR VAD KNAPPEN SKA GÖRA I NAMN CONTAINERN//
 nameInputField.addEventListener("focus", () => {
   playerList.innerHTML = "";
-  let playerNames =  JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
-  if(playerNames.length > 0){
+  let playerNames =
+    JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
+  if (playerNames.length > 0) {
     playerChoice.style.visibility = "visible";
     playerNames.forEach((name) => {
       let span = document.createElement("span");
@@ -66,7 +67,7 @@ nameInputField.addEventListener("focus", () => {
       span.style.marginLeft = "14px";
       span.style.fontSize = "1.2rem";
       span.style.color = "white";
-      playerChoice.appendChild(span);
+      playerList.appendChild(span);
       span.addEventListener("click", () => {
         nameInputField.value = span.textContent;
       });
@@ -80,6 +81,8 @@ nameInputBtn.addEventListener("click", function (e) {
   themeSelectView.classList.add("active");
   nameDisplay.textContent = `Välkommen ${playerName}!`;
 });
+
+//TEST
 
 ///KNAPP FÖR ATT BYTA ANVÄNDARE
 switchUserBtn.addEventListener("click", function () {
@@ -371,12 +374,12 @@ function displayQuiz(themes) {
     highscoreBtn.style.display = "flex";
   });
 
-//Skapa timesup message i HTML
-let timeUpMessage = document.createElement("p");
-timeUpMessage.id = "time-up-message";
-timeUpMessage.classList.add("time-up-message");
-timeUpMessage.style.display = "none";
-quizView.appendChild(timeUpMessage);
+  //Skapa timesup message i HTML
+  let timeUpMessage = document.createElement("p");
+  timeUpMessage.id = "time-up-message";
+  timeUpMessage.classList.add("time-up-message");
+  timeUpMessage.style.display = "none";
+  quizView.appendChild(timeUpMessage);
 
   //Skapa timern i HTML
   let quizTimer = document.createElement("div");
