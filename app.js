@@ -10,10 +10,9 @@ import {
 
 import { init, start, stop } from "./js/timer.js";
 
-const quizTimer = document.getElementById("question-timer");
-
 //SÄTTER VARIABLER FÖR DOM-ELEMENT
 
+const quizTimer = document.getElementById("question-timer");
 const themeMusicButton = document.getElementById("theme-music");
 const themeMoviesButton = document.getElementById("theme-movies");
 const themeGeographyButton = document.getElementById("theme-geography");
@@ -54,7 +53,7 @@ let questionIndex = -1;
 let playerPoints = 0;
 let playerTotalScore = 0;
 
-///STYR VAD KNAPPEN SKA GÖRA I NAMN CONTAINERN//
+///LÄGGER TILL SPELARVAL FRÅN LOCALSTORAGE//
 nameInputField.addEventListener("focus", () => {
   playerList.innerHTML = "";
   let playerNames =
@@ -74,6 +73,8 @@ nameInputField.addEventListener("focus", () => {
     });
   }
 });
+
+//Spara namnet och gå vidare till theme select
 nameInputBtn.addEventListener("click", function (e) {
   e.preventDefault();
   playerName = nameInputField.value.trim() || "Tomtenisse"; //Tar bort empy spaces (AI)
@@ -81,8 +82,6 @@ nameInputBtn.addEventListener("click", function (e) {
   themeSelectView.classList.add("active");
   nameDisplay.textContent = `Välkommen ${playerName}!`;
 });
-
-//TEST
 
 ///KNAPP FÖR ATT BYTA ANVÄNDARE
 switchUserBtn.addEventListener("click", function () {
@@ -103,7 +102,6 @@ async function fetchQuiz(themeChoice) {
     const data = await response.json();
     // Use the themeChoice to select the correct theme array
     const selectedTheme = data.themes[themeChoice];
-    console.log(`Loading ${themeChoice} theme:`, selectedTheme);
     displayQuiz(selectedTheme);
   } catch (error) {
     console.error("Type of error", error);
@@ -183,8 +181,7 @@ function createSnowflakes() {
   }
 }
 
-///DET HÄR GJORDE AI - EVENTLYSSNARE FÖR TEMAVAL-KNAPPARNA (VARFÖR WRAPPA FUNKTION I FUNKTION???)
-// Add click handlers - pass the theme name as a string and wrap fetchQuiz in a function
+///EVENTLYSSNARE FÖR TEMAVAL-KNAPPARNA
 themeMusicButton.addEventListener("click", () => fetchQuiz("music"));
 themeGeographyButton.addEventListener("click", () => fetchQuiz("geography"));
 themeMoviesButton.addEventListener("click", () => fetchQuiz("movies"));
@@ -192,7 +189,6 @@ themeChristmasButton.addEventListener("click", () => fetchQuiz("christmas"));
 
 //SKAPAR MUTE-KNAPP FÖR LJUDEFFEKTER
 const mainContainer = document.querySelector(".main-container");
-console.log(mainContainer);
 const muteBtn = document.createElement("button");
 muteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M533.6 32.5c-10.3-8.4-25.4-6.8-33.8 3.5s-6.8 25.4 3.5 33.8C557.5 113.8 592 180.8 592 256s-34.5 142.2-88.7 186.3c-10.3 8.4-11.8 23.5-3.5 33.8s23.5 11.8 33.8 3.5C598.5 426.7 640 346.2 640 256S598.5 85.2 533.6 32.5zM473.1 107c-10.3-8.4-25.4-6.8-33.8 3.5s-6.8 25.4 3.5 33.8C475.3 170.7 496 210.9 496 256s-20.7 85.3-53.2 111.8c-10.3 8.4-11.8 23.5-3.5 33.8s23.5 11.8 33.8 3.5c43.2-35.2 70.9-88.9 70.9-149s-27.7-113.8-70.9-149zm-60.5 74.5c-10.3-8.4-25.4-6.8-33.8 3.5s-6.8 25.4 3.5 33.8C393.1 227.6 400 241 400 256s-6.9 28.4-17.7 37.3c-10.3 8.4-11.8 23.5-3.5 33.8s23.5 11.8 33.8 3.5C434.1 312.9 448 286.1 448 256s-13.9-56.9-35.4-74.5zM80 352l48 0 134.1 119.2c6.4 5.7 14.6 8.8 23.1 8.8 19.2 0 34.8-15.6 34.8-34.8l0-378.4c0-19.2-15.6-34.8-34.8-34.8-8.5 0-16.7 3.1-23.1 8.8L128 160 80 160c-26.5 0-48 21.5-48 48l0 96c0 26.5 21.5 48 48 48z"/></svg>`;
 muteBtn.classList.add("mute-button");
@@ -202,19 +198,12 @@ setupMuteButton(muteBtn);
 
 ///VISA VALT TEMA I QUIZ CONTAINERN (SKAPAR ELEMENT FÖR FRÅGOR OCH SVARSKNAPPAR)
 function displayQuiz(themes) {
-  console.log("themes received:", themes);
-
   let recentScores = JSON.parse(localStorage.getItem("playerScoreHistory"));
   highscoreBtn.style.display = "none";
 
   playersArray = Array.isArray(recentScores) ? recentScores : [];
 
-  /*
-  savedScore = Number(savedScore);
-  console.log(savedScore);*/
-
   const arrLength = themes.length;
-  console.log(arrLength);
 
   themeSelectView.classList.remove("active");
   quizView.classList.add("active");
@@ -227,7 +216,7 @@ function displayQuiz(themes) {
   const questionImage = document.createElement("div");
   questionImage.classList.add("question-image-container");
   questionImage.style.backgroundImage = `url('${themes[questionIndex].image}')`;
-  questionImage.style.backgroundSize = "cover"; // or "contain" depending on what you want
+  questionImage.style.backgroundSize = "cover";
   questionImage.style.backgroundPosition = "center";
   questionImage.style.backgroundRepeat = "no-repeat";
   quizView.appendChild(questionImage);
