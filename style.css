@@ -707,3 +707,11 @@ body.snow-active .snowflake {
   right: 30px;
   font-size: 30px;
 }
+
+.time-up-message {
+    color: #ff4444;
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}
