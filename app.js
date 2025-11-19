@@ -28,6 +28,7 @@ const totalScoreDisplay = document.getElementById("player-total-score-display");
 const nameInputField = document.getElementById("name-input-field");
 const nameInputBtn = document.getElementById("name-input-button");
 const playerChoice = document.getElementById("player-choice");
+const playerList = document.getElementById("player-list")
 
 const nameDisplay = document.getElementById("name-display");
 const answerCheckDisplay = document.getElementById("answer-check-display");
@@ -55,9 +56,9 @@ let playerTotalScore = 0;
 
 ///STYR VAD KNAPPEN SKA GÖRA I NAMN CONTAINERN
 nameInputField.addEventListener("focus", () => {
-  let playerNames =
-    JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
-  if (playerNames.length > 0) {
+  playerList.innerHTML = "";
+  let playerNames =  JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
+  if(playerNames.length > 0){
     playerChoice.style.visibility = "visible";
     playerNames.forEach((name) => {
       let span = document.createElement("span");
