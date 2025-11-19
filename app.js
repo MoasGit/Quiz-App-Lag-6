@@ -7,7 +7,7 @@ import {
   playSound,
 } from "./js/sound-effects.js";
 
-import { init, start, stop} from "./js/timer.js";
+import { init, start, stop } from "./js/timer.js";
 
 const quizTimer = document.getElementById("question-timer");
 
@@ -373,7 +373,6 @@ function displayQuiz(themes) {
 //Skapa timesup message i HTML
 let timeUpMessage = document.createElement("p");
 timeUpMessage.id = "time-up-message";
-timeUpMessage.textContent = "Tiden är ute!";
 timeUpMessage.classList.add("time-up-message");
 timeUpMessage.style.display = "none";
 quizView.appendChild(timeUpMessage);
@@ -399,7 +398,7 @@ quizView.appendChild(timeUpMessage);
 
   quizView.appendChild(quizTimer);
 
-  //Initierar timern och stoppas om man nått gränsen för antal frågor
+  //Initierar timern och sätter villkor för när tiden tar slut
   init(quizTimer, function () {
   timeUpMessage.style.display = "block";
     nextBtn.style.display = "block";
