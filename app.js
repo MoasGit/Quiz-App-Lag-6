@@ -101,15 +101,15 @@ function showHighscores() {
   let playersArray =
     JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
 
-  let sorted = playersArray.slice().sort((a, b) => b.score - a.score);
-  let topFivePlayers = sorted.slice(0, 5);
+   let highScoreArray = playersArray
+        .slice()
+        .sort((a, b) => Number(b.score) - Number(a.score));
+   highscoreList.innerHTML = "";
 
-  highscoreList.innerHTML = "";
-
-  topFivePlayers.forEach((player) => {
-    let li = document.createElement("li");
-    li.textContent = `Spelare: ${player.name}, Score: ${player.score}`;
-    highscoreList.appendChild(li);
+      highScoreArray.slice(0, 5).forEach((a) => {
+        let li = document.createElement("li");
+        li.innerHTML = `Spelare: ${a.name}, Score: ${a.score}`;
+        highScore.appendChild(li);
   });
 }
 
