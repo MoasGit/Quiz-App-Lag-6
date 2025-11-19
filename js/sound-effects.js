@@ -14,6 +14,7 @@ export function playSound(audioElement) {
   }
 }
 
+//MUTE KNAPP
 export function setupMuteButton(button) {
   button.addEventListener("click", function () {
     muted = !muted;
