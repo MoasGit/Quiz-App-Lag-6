@@ -122,6 +122,12 @@ closeBtn.addEventListener("click", function () {
   modal.style.display = "none";
 });
 
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
 //FÅR DET ATT SNÖA!
 let snowButton = document.createElement("button");
 let snowing = false;
