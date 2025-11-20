@@ -375,7 +375,8 @@ function displayQuiz(themes) {
   backToMainBtn.innerHTML = '<i data-lucide="arrow-left-to-line"></i>';
   backToMainBtn.classList.add("back-to-main-button");
   quizView.appendChild(backToMainBtn);
-  // If lucide is loaded, replace the newly added icon so it appears immediately
+
+  //HANTERAR LUCIDE IKONEN SÅ DEN VISAS DIREKT (hade problem med det innan..)
   if (
     typeof lucide !== "undefined" &&
     typeof lucide.createIcons === "function"
@@ -461,7 +462,7 @@ restartBtn.addEventListener("click", function () {
   playerPoints = 0;
 });
 
-// If lucide is loaded, replace the newly added icon
+// IKONHANTERING
 if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
   lucide.createIcons();
 }
