@@ -79,6 +79,7 @@ nameInputBtn.addEventListener("click", function (e) {
   playerName = nameInputField.value.trim() || "Tomtenisse"; //Tar bort empy spaces (AI)
   nameView.classList.remove("active");
   themeSelectView.classList.add("active");
+  creditsBtn.style.display = "none";
   nameDisplay.textContent = `Välkommen ${playerName}!`;
 });
 
@@ -89,6 +90,7 @@ switchUserBtn.addEventListener("click", function () {
   themeSelectView.classList.remove("active");
   nameView.classList.add("active");
   nameInputField.value = "";
+  creditsBtn.style.display = "flex";
 });
 
 ///LADDAR IN DATAN FRÅN JSON-FILEN
@@ -99,7 +101,7 @@ async function fetchQuiz(themeChoice) {
     if (!response.ok) {
       throw new Error(`HTTP error status ${response.status}`);
     }
-
+    
     const data = await response.json();
     // Use the themeChoice to select the correct theme array
     const selectedTheme = data.themes[themeChoice];
@@ -109,6 +111,23 @@ async function fetchQuiz(themeChoice) {
     console.error("Type of error", error);
   }
 }
+////Credits modal
+ const creditsBtn = document.createElement("button");
+ creditsBtn.innerHTML ='©';
+ creditsBtn.classList.add("credits-button");
+ document.body.appendChild(creditsBtn);
+
+
+ const creditsModal = document.getElementById("credits-modal");
+ const closeCreditsBtn = document.querySelector(".close-cred-btn");
+
+ creditsBtn.addEventListener("click", function () {
+   creditsModal.style.display = "flex";
+ });
+
+ closeCreditsBtn.addEventListener("click", function () {
+   creditsModal.style.display = "none";
+ });
 
 /////HIGHSCORE MODAL SOM VISAR TOPP 5 SPELARE
 const highscoreBtn = document.createElement("button");
@@ -206,6 +225,7 @@ function displayQuiz(themes) {
 
   let recentScores = JSON.parse(localStorage.getItem("playerScoreHistory"));
   highscoreBtn.style.display = "none";
+  creditsBtn.style.display = "none";
 
   playersArray = Array.isArray(recentScores) ? recentScores : [];
 
