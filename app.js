@@ -40,6 +40,8 @@ const playerScore = document.getElementById("player-score");
 const totalScore = document.getElementById("total-score");
 const highScore = document.getElementById("high-score");
 
+const chosenAnswers = [];
+
 let playerName;
 
 let playersArray = [];
@@ -277,7 +279,7 @@ function displayQuiz(themes) {
       timeUpMessage.style.display = "none";
       quizView.classList.remove("active");
       resultsView.classList.add("active");
-      playerScore.innerHTML = `Total score ${playerPoints}`;
+      playerScore.innerHTML = `Spelare: ${playerName}, Total score ${playerPoints} / ${themes.length}`;
       playerTotalScore = playerPoints;
 
       let thisPlayer = {
@@ -291,6 +293,7 @@ function displayQuiz(themes) {
       }
 
       let found = false;
+      /*
       for (let i = 0; i < playersArray.length; i++) {
         if (playersArray[i].name == playerName) {
           totalScoreDisplay.innerHTML = `Spelare: ${playerName}, Totala quizpoäng: ${playersArray[i].score}`;
@@ -301,6 +304,41 @@ function displayQuiz(themes) {
       if (found == false) {
         totalScoreDisplay.innerHTML = `Ny spelare: ${playerName}, Totala quizpoäng: ${playerTotalScore}`;
       }
+        */
+      function showCorrectAnswers(){
+        
+        for(let i = 0; i < themes.length; i++){
+        let options = themes[i].options;
+        let answer = themes[i].answer;
+        let checkAnswer = document.createElement("span");
+        
+        checkAnswer.textContent = `${themes[i].options[answer]}`
+        checkAnswer.classList.add("check-answer");
+        checkAnswer.style.fontSize = "1.2rem";
+        checkAnswer.style.color = "orange";
+        checkAnswer.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+        let check = document.createElement("span");
+        if(answer == chosenAnswers[i]){
+          check.textContent = `✓`
+        }
+        else{
+          check.textContent = "×"
+        }
+
+        check.style.fontSize = "2rem";
+        check.style.marginLeft = "5px"
+
+        let question = document.createElement("p");
+        question.textContent = `${themes[i].question} - `
+        question.appendChild(checkAnswer)
+        question.appendChild(check)
+        totalScoreDisplay.appendChild(question)
+      }
+        
+      }
+
+      showCorrectAnswers();
+      
 
       questionIndex = -1;
       console.log(playerTotalScore);
@@ -328,6 +366,7 @@ function displayQuiz(themes) {
 
   ////LOOP SOM SKAPAR EN KNAPP FÖR VARJE SVARSALTERNATIV
   options.forEach((option, idx) => {
+    
     let btn = document.createElement("button");
     btn.innerHTML = `${option}`;
     btn.classList.add("answer-button");
@@ -335,7 +374,9 @@ function displayQuiz(themes) {
 
     ///STARTAR CHECKFUNKTIONEN OCH SKICKAR MED SVARET MAN KLICKADE PÅ
     btn.addEventListener("click", function () {
+      
       checkAnswer(idx);
+      chosenAnswers.push(idx);
 
       console.log(questionIndex);
     });
