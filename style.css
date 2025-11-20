@@ -61,6 +61,18 @@ h6 {
   width: 300px;
 }
 
+.version-container {
+  color: #fbdd8d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+}
+
+.logo-container {
+  position: relative;
+}
+
 .header {
   font-family: "Mountains of Christmas", serif;
   font-weight: 400;
@@ -163,11 +175,11 @@ h6 {
   color: #cfbd8b;
   visibility: hidden;
   text-align: center;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 #player-list span:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 
 span.correct {
@@ -321,19 +333,6 @@ span.incorrect {
 .next-question-button:hover {
   animation: none;
 }
-
-/*.next-question-button::before {
-  content: "Temporary :)";
-  position: absolute;
-  top: 0px;
-  left: -18px;
-  font-size: 10px;
-  color: black;
-  background-color: red;
-  border-radius: 10px;
-  padding: 2px 5px;
-  transform: rotate(-24deg);
-}*/
 
 .answer-button {
   width: 50%;
@@ -670,6 +669,42 @@ body.snow-active .snowflake {
   transform: scale(1.1);
 }
 
+.credits-button {
+  position: absolute;
+  z-index: 200;
+  top: 30px;
+  right: 30px;
+  border-radius: 100%;
+  border: none;
+  background: #2f2f2f;
+  width: 50px;
+  height: 50px;
+  color: white;
+  cursor: pointer;
+  fill: #fff;
+  display: flex;
+  font-size: 2.6rem;
+  transition: all 0.2s ease-in-out;
+  justify-content: center;
+  align-items: center;
+}
+
+.credits-button:hover {
+  transform: scale(1.1);
+}
+
+.creditsModal {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
 .modal {
   display: none;
   position: absolute;
@@ -706,6 +741,18 @@ body.snow-active .snowflake {
   transform: scale(1.2);
   color: red;
 }
+.close-cred-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.close-cred-btn:hover {
+  transform: scale(1.2);
+  color: red;
+}
 
 .highscore-title {
   color: blue;
@@ -727,20 +774,30 @@ body.snow-active .snowflake {
   text-align: center;
 }
 
-.version-container {
-  color: #fbdd8d;
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  font-size: 30px;
+.time-up-message {
+  color: #ff4444;
+  font-size: 2rem;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
 }
 
-.time-up-message {
-    color: #ff4444;
-    font-size: 2rem;
-    text-align: center;
-    margin: 20px 0;
-    font-weight: bold;
+#silktide-cookie-icon {
+  position: absolute !important;
+  right: 100px !important;
+  top: 30px;
+  width: 50px !important;
+  height: 50px !important;
+  background-color: #2f2f2f !important;
+  transition: all 0.2s ease-in-out;
+}
+
+#silktide-cookie-icon svg {
+  width: 25px;
+}
+
+#silktide-cookie-icon:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 992px) {
