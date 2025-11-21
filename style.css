@@ -101,7 +101,7 @@ body {
   height: 100vh;
   background-color: var(--background-red);
   z-index: 1;
-  background-image: url(/images/landscape-bg.jpg);
+  background-image: url(./images/landscape-bg.jpg);
   position: relative;
   background-size: cover;
 }
