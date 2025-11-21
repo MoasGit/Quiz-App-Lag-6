@@ -40,7 +40,7 @@ När ett tema valts:
 
 ### **Styrkor**
 
-- Startk designkoncept, tydligt tema och konsekvent design
+- Starkt designkoncept - tydligt tema och konsekvent design
 - Logiskt flöde och tydligt flödesschema från start (visualiserat i Miro)
 - Funktionalitet, struktur och användarupplevelse.
 - Bra samarbete och kodgranskning
