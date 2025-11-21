@@ -1,17 +1,54 @@
 # Quiz-App-Lag-6
 
-Gruppdeltagare: Jesper Reijs, Kalle Salomonsson, Douglas Netzel, Ella Gabari & Moa Sjöberg.
+**Gruppdeltagare:** Jesper Reijs, Kalle Salomonsson, Douglas Netzel, Ella Gabari & Moa Sjöberg.
 
-Välkommen till vår quiz-app - Quizmas!
+Välkommen till vår quiz-app – **Quizmas**!
 
-Vår quizapp har ett tydligt jultema rakt genom och börjar på en sida där man kan skriva in sitt namn (skriver du inget namn får du per automatik namnet "Tomtenisse"9. Namnet sparas sedan för poängställning. På första sidan får man också alternativet att neka eller acceptera cookies som använda för att samla in data till Google Analytics. Här ser vi också de knappar vi har på sidan. En knapp för credits som bara visas på denna startsida, och sen tre knappar som följer med i hela flödet i vårt quiz, en mute knapp, en snöflingor-toogle och en knapp för highscore listan som sparas via localstorage.
+---
 
-Klickar man på starta kommer man till temaväljaren där man kan välja på fyra teman. Klickar man in sig på ett tema så startar en timer för varje fråga. Timern stoppas om man svarat på frågan, och då visas en nästa fråga knapp som tar en till nästa fråga. När man gått genom alla frågor får man upp sitt resultat och kan välja att starta ett nytt quiz.
+## 🎄 Beskrivning
 
-Vi tycker att vårt designkoncept är stark och att vi har bra UX-tänk. Funktioner och flöde beter sig logiskt vilket ökar användarupplevelsen. Vi hade ett genomtänkt flödesschema från början som vi gjorde tydligt för alla genom att göra det visuellt via Miro.
+Vår quizapp har ett tydligt jultema rakt igenom och börjar på en startsida där man kan skriva in sitt namn.  
+Om inget namn skrivs in får man automatiskt namnet **"Tomtenisse"**. Namnet sparas sedan för poängställningen.
 
-Vi har gått genom koden tillsammans och lagt kommentarer på varje del vilket förtydligar vad allt gör. Samarbetet har gått bra, vi har arbetat med Trello för att alla ska hålla koll på vad man ska göra och kommunicerat när vi pushat kod som krävt 2 approvals innan den mergat.
+På startsidan får man också valet att acceptera eller neka cookies, som används för att samla in data till Google Analytics.
 
-En svaghet med vår kod är att vi har jobbat med få moduler. Vi har behövt hantera en del merge conflicts i GitHub mycket pga detta.
+Här finns också knappar:
 
-Vi har också en svaghet med vår cookie consent, att man måste uppdatera sidan för att man ska kunna ändra sina inställningar efter att ha gjort det initiala valet att neka eller acceptera kakor. Men det är också en styrka att vi har en tydlig cookie consent som går att nå igen.
+- **Credits-knapp** (visas bara på startsidan)
+- **Mute-knapp** (följer med i hela flödet)
+- **Snöflinge-toggle**
+- **Highscore-knapp** (sparas via LocalStorage)
+
+---
+
+## 🎅 Flöde
+
+När man klickar _Starta_ kommer man till temaväljaren där man kan välja mellan fyra olika teman.
+
+När ett tema valts:
+
+- En timer startar för varje fråga
+- Timern stoppas när man svarar
+- En _Nästa fråga_-knapp visas
+- När alla frågor är klara visas resultatet
+- Man kan då välja att starta ett nytt quiz
+
+---
+
+## 🔧 Styrkor och svagheter
+
+### **Styrkor**
+
+- Startk designkoncept, tydligt tema och konsekvent design
+- Logiskt flöde och tydligt flödesschema från start (visualiserat i Miro)
+- Funktionalitet, struktur och användarupplevelse.
+- Bra samarbete och kodgranskning
+- Kommentarer i koden förklarar vad alla delar gör
+- Kod har krävt **2 approvals** innan merge.
+
+### **Svagheter**
+
+- Vi har arbetat med få moduler → vilket skapade fler merge conflicts
+
+---
