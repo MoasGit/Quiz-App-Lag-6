@@ -39,7 +39,7 @@ const nextQuestionBtn = document.getElementById("next-question-button");
 const playerScore = document.getElementById("player-score");
 const totalScore = document.getElementById("total-score");
 const highScore = document.getElementById("high-score");
-const highScoreView = document.getElementById("high-score-view")
+const highScoreView = document.getElementById("high-score-view");
 
 let chosenAnswers = [];
 
@@ -61,7 +61,7 @@ nameInputField.addEventListener("focus", () => {
   playerList.innerHTML = "";
   let playerNames =
     JSON.parse(localStorage.getItem("playerScoreHistory")) || [];
-    console.log(playerNames)
+  console.log(playerNames);
   if (playerNames.length > 0) {
     //playerChoice.style.visibility = "visible";
     playerChoice.classList.add("active");
@@ -92,7 +92,6 @@ nameInputBtn.addEventListener("click", function (e) {
   creditsBtn.style.display = "none";
   clearPlayersBtn.style.display = "none";
   nameDisplay.textContent = `Välkommen ${playerName}!`;
-  
 });
 
 ///KNAPP FÖR ATT BYTA ANVÄNDARE
@@ -101,7 +100,7 @@ switchUserBtn.addEventListener("click", function () {
   nameView.classList.add("active");
   nameInputField.value = "";
   creditsBtn.style.display = "flex";
-  clearPlayersBtn.style.display = "flex"
+  clearPlayersBtn.style.display = "flex";
 });
 
 ///LADDAR IN DATAN FRÅN JSON-FILEN
@@ -164,11 +163,9 @@ clearPlayersBtn.textContent = "Clear Players";
 clearPlayersBtn.classList.add("clearplayers-button");
 document.body.appendChild(clearPlayersBtn);
 
-clearPlayersBtn.addEventListener("click", ()=>{
-  
-    localStorage.removeItem("playerScoreHistory")
-  
-})
+clearPlayersBtn.addEventListener("click", () => {
+  localStorage.removeItem("playerScoreHistory");
+});
 
 function showHighscores() {
   let playersArray =
@@ -179,11 +176,44 @@ function showHighscores() {
     .sort((a, b) => Number(b.score) - Number(a.score));
   highscoreList.innerHTML = "";
 
-  highScoreArray.slice(0, 5).forEach((a) => {
+  highScoreArray.slice(0, 5).forEach((a, index) => {
     let li = document.createElement("li");
-    li.innerHTML = `${a.name} - ${a.score} poäng`;
+
+    // IKONER FÖR 1-3
+    let icon = "";
+    if (index === 0) {
+      icon = '<i data-lucide="trophy" class="trophy-gold"></i>';
+    } else if (index === 1) {
+      icon = '<i data-lucide="trophy" class="trophy-silver"></i>';
+    } else if (index === 2) {
+      icon = '<i data-lucide="trophy" class="trophy-bronze"></i>';
+    } else {
+      //IKONER FÖR 4-5
+      icon = '<i data-lucide="award" class="trophy-other"></i>';
+    }
+
+    li.innerHTML = `
+      <span class="trophy-container">${icon}</span>
+      <span class="player-info">
+        <span class="player-name">${a.name}:</span>
+        <span class="player-score">${a.score} poäng</span>
+      </span>
+    `;
+
+    if (index < 3) {
+      li.classList.add(`place-${index + 1}`);
+    }
+
     highScore.appendChild(li);
   });
+
+  // Reinitialize Lucide icons
+  if (
+    typeof lucide !== "undefined" &&
+    typeof lucide.createIcons === "function"
+  ) {
+    lucide.createIcons();
+  }
 }
 
 highscoreBtn.addEventListener("click", function () {
@@ -266,7 +296,7 @@ setupMuteButton(muteBtn);
 function displayQuiz(themes) {
   let recentScores = JSON.parse(localStorage.getItem("playerScoreHistory"));
   highscoreBtn.style.display = "none";
-  bigHighscoreBtn.style.display = "none"
+  bigHighscoreBtn.style.display = "none";
   creditsBtn.style.display = "none";
   clearPlayersBtn.style.display = "none";
 
@@ -325,7 +355,7 @@ function displayQuiz(themes) {
       timeUpMessage.style.display = "none";
       quizView.classList.remove("active");
       resultsView.classList.add("active");
-      playerScore.innerHTML = `Spelare: ${playerName}, Total score ${playerPoints} / ${themes.length}`;
+      playerScore.innerHTML = `${playerName}, Poäng: ${playerPoints} / ${themes.length}`;
       playerTotalScore = playerPoints;
 
       let thisPlayer = {
@@ -339,55 +369,49 @@ function displayQuiz(themes) {
       }
 
       let found = false;
-        
 
-      
       for (let i = 0; i < playersArray.length; i++) {
         if (playersArray[i].name == playerName) {
           found = true;
           break;
         }
       }
-        
+
       // VISAR RESULTAT EFTER VARJE OMGÅNG MED POÄNG OCH RÄTTA SVAR
-      function showCorrectAnswers(){
+      function showCorrectAnswers() {
         totalScoreDisplay.textContent = "";
         bigHighscoreBtn.style.display = "flex";
-        for(let i = 0; i < themes.length; i++){
-          
-        let options = themes[i].options;
-        let answer = themes[i].answer;
-        let checkAnswer = document.createElement("span");
-        
-        checkAnswer.textContent = `${themes[i].options[answer]}`
-        
-        checkAnswer.style.fontSize = "1.2rem";
-        checkAnswer.style.color = "orange";
-        checkAnswer.style.textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
-        let check = document.createElement("span");
-        if(answer == chosenAnswers[i]){
-          check.textContent = `✓`
-        }
-        else{
-          check.textContent = "×"
-        }
+        for (let i = 0; i < themes.length; i++) {
+          let options = themes[i].options;
+          let answer = themes[i].answer;
+          let checkAnswer = document.createElement("span");
 
-        check.style.fontSize = "2rem";
-        check.style.marginLeft = "5px"
+          checkAnswer.textContent = `${themes[i].options[answer]}`;
 
-        let question = document.createElement("p");
-        question.textContent = `${themes[i].question} - `
-        question.appendChild(checkAnswer)
-        question.appendChild(check)
-        
-        totalScoreDisplay.appendChild(question)
-        
-      }
-        
+          checkAnswer.style.fontSize = "1.2rem";
+          checkAnswer.style.color = "orange";
+          checkAnswer.style.textShadow =
+            "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+          let check = document.createElement("span");
+          if (answer == chosenAnswers[i]) {
+            check.textContent = `✅`;
+          } else {
+            check.textContent = "❌";
+          }
+
+          check.style.fontSize = "2rem";
+          check.style.marginLeft = "5px";
+
+          let question = document.createElement("p");
+          question.textContent = `${themes[i].question} - `;
+          question.appendChild(checkAnswer);
+          question.appendChild(check);
+
+          totalScoreDisplay.appendChild(question);
+        }
       }
 
-    showCorrectAnswers();
-      
+      showCorrectAnswers();
 
       questionIndex = -1;
       console.log(playerTotalScore);
@@ -408,8 +432,6 @@ function displayQuiz(themes) {
         highScore.appendChild(li);
       });
     }
-
-    
   });
 
   let options = themes[questionIndex].options;
@@ -426,7 +448,6 @@ function displayQuiz(themes) {
     btn.addEventListener("click", function () {
       chosenAnswers.push(idx);
       checkAnswer(idx);
-      
 
       console.log(questionIndex);
     });
@@ -444,7 +465,7 @@ function displayQuiz(themes) {
     ///SÄTTER EN KLASS PÅ KNAPPARNA FÖR SYNS SKULL
     if (selectedIdx === correctIndex) {
       playSound(correctSound);
-      answerCheck.innerHTML = `<span class="correct">Du hade rätt!</span>`;
+      answerCheck.innerHTML = `<span class="correct">Rätt! ✅</span>`;
 
       //DESSA ÄR BARA HÄR FÖR ATT RE-TRIGGA ANIMATIONEN
       answerCheck.style.animation = "none";
@@ -455,7 +476,7 @@ function displayQuiz(themes) {
       playerPoints++;
     } else if (selectedIdx != correctIndex || timeLeft < -1) {
       playSound(incorrectSound);
-      answerCheck.innerHTML = `<span class="incorrect">Du hade fel!</span>`;
+      answerCheck.innerHTML = `<span class="incorrect">Fel! ❌</span>`;
       //DESSA ÄR BARA HÄR FÖR ATT RE-TRIGGA ANIMATIONEN
       answerCheck.style.animation = "none";
       answerCheck.offsetHeight;
@@ -539,7 +560,7 @@ function displayQuiz(themes) {
     });
 
     if (answerCheckText) {
-      answerCheckText.innerHTML = `<span class="incorrect">Tiden är slut!</span>`;
+      answerCheckText.innerHTML = `<span class="incorrect">Tiden tog slut! ⏰</span>`;
       answerCheckText.style.animation = "none";
       answerCheckText.offsetHeight;
       answerCheckText.style.animation = "";
@@ -551,11 +572,10 @@ start();
 
 ///NOLLSTÄLLER QUIZZET OCH GÅR TILLBAKS TILL TEMAVAL-CONTAINERN
 restartBtn.addEventListener("click", function () {
-  
   resultsView.classList.remove("active");
   themeSelectView.classList.add("active");
   highscoreBtn.style.display = "flex";
-  bigHighscoreBtn.style.display = "none"
+  bigHighscoreBtn.style.display = "none";
   playerPoints = 0;
   chosenAnswers = [];
 });

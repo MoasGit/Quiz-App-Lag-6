@@ -73,6 +73,10 @@ h6 {
   position: relative;
 }
 
+body {
+  background-color: var(--background-red);
+}
+
 .header {
   font-family: "Mountains of Christmas", serif;
   font-weight: 400;
@@ -97,7 +101,18 @@ h6 {
   height: 100vh;
   background-color: var(--background-red);
   z-index: 1;
+  background-image: url(/images/landscape-bg.jpg);
   position: relative;
+  background-size: cover;
+}
+
+.main-container:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-red);
+  opacity: 0.8;
 }
 
 .view-container {
@@ -167,8 +182,8 @@ h6 {
 #player-choice {
   border-radius: 10px;
   padding: 5px;
-  width: 500px;
-  height: 80px;
+  width: 50%;
+  height: 180px;
 
   overflow: auto;
   color: #cfbd8b;
@@ -655,6 +670,8 @@ body.snow-active .snowflake {
 
 #player-score {
   margin-bottom: 1rem;
+  text-align: center;
+  font-size: 24px;
 }
 
 .highscore-button {
@@ -695,8 +712,24 @@ body.snow-active .snowflake {
   align-items: center;
 }
 
+#restart-button {
+  background-color: var(--background-black);
+  color: #fff;
+  padding: 20px;
+  border: none;
+  border-radius: 20px;
+  margin-top: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#restart-button:hover {
+  transform: scale(1.1);
+}
+
 .clearplayers-button {
- position: absolute;
+  position: absolute;
   z-index: 200;
   bottom: 30px;
   right: 100px;
@@ -725,15 +758,19 @@ body.snow-active .snowflake {
 }
 
 #high-score-view {
-  border: 2px double black;
-  border-radius: 7px;
-  background-color: #a53636;
+  border-radius: 20px;
+  background-color: var(--background-red);
   color: white;
   list-style-position: inside;
-  padding: 1rem;
-  margin: 1rem auto;
-  width: 850px;
+  padding: 40px;
+  width: 100%;
+  max-width: 850px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#high-score-view h2 {
+  text-align: center;
+  font-size: 38px;
 }
 
 #switch-user-button {
@@ -811,12 +848,15 @@ body.snow-active .snowflake {
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: var(--background-red);
+  color: #fff;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 20px;
   width: 100%;
   max-width: 60%;
   text-align: center;
@@ -827,6 +867,25 @@ body.snow-active .snowflake {
 #high-score li {
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+.trophy-gold {
+  color: #ffd700;
+  filter: drop-shadow(0 0 8px #ffd700);
+}
+
+.trophy-silver {
+  color: #c0c0c0;
+  filter: drop-shadow(0 0 6px #c0c0c0);
+}
+
+.trophy-bronze {
+  color: #cd7f32;
+  filter: drop-shadow(0 0 6px #cd7f32);
+}
+
+.trophy-other {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .close-btn {
@@ -855,7 +914,7 @@ body.snow-active .snowflake {
 }
 
 .highscore-title {
-  color: var(--background-red);
+  color: #fff;
   font-weight: 600;
   font-size: 40px;
   margin-bottom: 50px;
@@ -906,8 +965,9 @@ body.snow-active .snowflake {
   /* top: 2px; */
   /* left: 50%; */
   /* transform: translateX(-50%); */
-  background-color: var(--background-black);
+  background-color: var(--background-red);
   color: #fff;
+  border: 1px solid #fff;
   padding: 4px 7px;
   border-radius: 20px;
   font-size: 0.7rem;
@@ -924,7 +984,7 @@ body {
 .main-container {
   overflow-x: hidden;
 }
-@media (max-width: 992px) {
+@media (max-width: 1180px) {
   #theme-music,
   #theme-movies,
   #theme-geography,
@@ -991,13 +1051,12 @@ body {
   }
 
   .timer-text {
-    font-size: 50px !important;
+    font-size: 38px !important;
   }
 
   .question-image-container {
-  }
-
-  .answer-check-text {
+    width: min(150px, 30vw);
+    height: min(150px, 30vw);
   }
 }
 
@@ -1017,7 +1076,7 @@ body {
   }
 
   #name-input-field {
-    font-size: 18px;
+    font-size: 18px !important;
   }
 
   #theme-music,
@@ -1055,17 +1114,17 @@ body {
   }
 
   .header {
-    font-size: 48px;
+    font-size: 38px;
   }
 
   .logo {
-    height: 250px;
-    width: 250px;
+    height: 150px;
+    width: 150px;
   }
 
   #name-input-button,
   #name-input-field {
-    height: 80px;
+    height: 60px !important;
   }
 
   #player-list span {
@@ -1149,13 +1208,5 @@ body {
 
   .highscore-title {
     font-size: 28px;
-  }
-}
-
-@media (max-height: 1024px) {
-  .question-image-container {
-    width: min(200px, 40vw);
-    height: min(200px, 40vw);
-    top: 24vh;
   }
 }
